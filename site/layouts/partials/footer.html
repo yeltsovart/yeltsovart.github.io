@@ -1,0 +1,33 @@
+<footer class="bg-black ph3 pv4 white">
+
+	<div class="mw7 center pt3">
+
+		<div class="flex-ns justify-between">
+
+			<div>
+				<ul class="list mt0 mb3 pl0">
+					<li><a href="/post" class="link">Блог</a></li>
+					<li><a href="/about" class="link">Проект</a></li>
+					<li><a href="/donate" class="link">Для спонсоров</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<ul class="mhn2 mv0 pl0">
+					{{ partial "social-icon" (dict "link" "#" "svg" "vk") }}
+					{{ partial "social-icon" (dict "link" "#" "svg" "instagram") }}
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+</footer>
+
+{{ partial "svg" . }}
+
+<script src="/app.js"></script>
+
+</body>
+
+</html>
