@@ -10,7 +10,7 @@ import webpackConfig from "./webpack.conf";
 import svgstore from "gulp-svgstore";
 import svgmin from "gulp-svgmin";
 import inject from "gulp-inject";
-// import replace from "gulp-replace";
+import replace from "gulp-replace";
 import cssnano from "cssnano";
 
 const browserSync = BrowserSync.create();
@@ -21,18 +21,18 @@ gulp.task("hugo", (cb) => buildSite(cb));
 gulp.task("hugo-preview", (cb) => buildSite(cb, ["--buildDrafts", "--buildFuture"]));
 
 gulp.task("cms", () => {
-  // const match = process.env.REPOSITORY_URL ? process.env.REPOSITORY_URL : cp.execSync("git remote -v", {encoding: "utf-8"});
-  // let repo = null;
-  // match.replace(/github.com[:/](\S+)(\.git)?/, (_, m) => {
-  //   repo = m.replace(/\.git$/, "");
-  // });
-  // gulp.src("./src/cms/*")
-  //   .pipe(replace("<% GITHUB_REPOSITORY %>", repo))
-  //   .pipe(gulp.dest("./dist/admin"))
-  //   .pipe(browserSync.stream());
-  // gulp.src(["./node_modules/netlify-cms/dist/*.*", "!./node_modules/netlify-cms/dist/*.html"])
-  //   .pipe(gulp.dest("./dist"))
-  //   .pipe(browserSync.stream())
+  const match = process.env.REPOSITORY_URL ? process.env.REPOSITORY_URL : cp.execSync("git remote -v", {encoding: "utf-8"});
+  let repo = null;
+  match.replace(/github.com[:/](\S+)(\.git)?/, (_, m) => {
+    repo = m.replace(/\.git$/, "");
+  });
+  gulp.src("./src/cms/*")
+    .pipe(replace("<% GITHUB_REPOSITORY %>", repo))
+    .pipe(gulp.dest("./dist/admin"))
+    .pipe(browserSync.stream());
+  gulp.src(["./node_modules/netlify-cms/dist/*.*", "!./node_modules/netlify-cms/dist/*.html"])
+    .pipe(gulp.dest("./dist"))
+    .pipe(browserSync.stream())
 });
 
 gulp.task("build", ["css", "js", "hugo", "cms"]);
