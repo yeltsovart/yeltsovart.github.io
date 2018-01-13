@@ -92,6 +92,18 @@ gulp.task("server", ["hugo", "css", "js", "svg", "cms"], () => {
   gulp.watch("./site/**/*", ["hugo"]);
 });
 
+gulp.task("dev", ["hugo", "css", "js", "svg"], () => {
+  browserSync.init({
+    server: {
+      baseDir: "./dist"
+    }
+  });
+  gulp.watch("./src/js/**/*.js", ["js"]);
+  gulp.watch("./src/css/**/*.css", ["css"]);
+  gulp.watch("./site/static/img/icons/*.svg", ["svg"]);
+  gulp.watch("./site/**/*", ["hugo"]);
+});
+
 function buildSite(cb, options) {
   const args = options ? defaultArgs.concat(options) : defaultArgs;
 

@@ -1,5 +1,6 @@
 {
     "name": "Yeltsov Art",
+    "short_name": "Yeltsov Art",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
